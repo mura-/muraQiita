@@ -35,7 +35,12 @@ gem 'therubyracer', platforms: :ruby
 gem 'bcrypt', '~> 3.1.7'
 gem 'nokogiri', '~> 1.6.1'
 gem 'rails-i18n', '~> 4.0.1'
-
+gem 'kaminari', '~> 0.15.1'
+gem 'quiet_assets', '~> 1.0.2', group: :development
+gem 'date_validator', '~> 0.7.0'
+gem 'email_validator', '~> 1.4.0'
+gem 'haml-rails'
+gem 'erb2haml'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
