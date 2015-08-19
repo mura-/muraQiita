@@ -1,0 +1,27 @@
+- @title = 'アカウント情報'
+%h1= @title
+.table-wrapper
+  .links
+    = link_to 'アカウント情報編集', :edit_user
+  
+  %table.attributes
+    %tr
+      %th ユーザーID
+      %td
+        = @user.id
+    %tr
+      %th ユーザー名
+      %td
+        = @user.name
+    %tr
+      %th メールアドレス
+      %td.email
+        = @user.email
+    %tr
+      %th パスワード
+      %td.password ************
+    %tr
+      %th 開始日
+      %td.date
+        = @user.start_date.strftime('%Y/%m/%d')
+
