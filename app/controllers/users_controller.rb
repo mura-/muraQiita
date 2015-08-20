@@ -34,7 +34,7 @@ class UsersController < ApplicationController
     @user.assign_attributes(user_params)
     if @user.save
       flash.notice = 'アカウントを更新しました。'
-      redirect_to user_url(id: @user.id)
+      redirect_to user_url
     else 
       render action: 'edit'
     end

@@ -1,0 +1,81 @@
+@import './dimensions';
+@import './colors';
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+.cf {
+  *zoom:1;
+  *min-height:0;
+}
+
+.cf:after {
+  content:"";
+  display:block;
+  clear:both;
+}
+
+.top-wrapper {
+  margin: 100px 50px;
+  width: 100%;
+  height: 100%;
+
+  .top-title {
+    width: 500px;
+    height: 100%;
+    float: left;
+    #logo {
+      font-size: $very_huge;
+      display: block;
+      background-color: $green;
+      color: white;
+      padding: 10px;
+      width: 250px;
+      text-align: center;
+    }
+  }
+
+  .top-form {
+    width: auto;
+    label {
+      display: block;
+      float: left;
+      width: 150px;
+    }
+    input[type="text"], input[type="password"] {
+      width: 200px;
+    }
+  }
+}
+
+header {
+  padding: $moderate;
+  background-color: white;
+  color: $green;
+  border-bottom: inset 1px $gray;
+  a.logo-mark {
+    float: none;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  a {
+    float: right;
+    color: $green;
+  }
+}
+
+footer {
+  bottom: 0;
+  position: absolute;
+  width: 100%;
+  background-color: $dark_gray;
+  color: $very_light_gray;
+  p {
+    text-align: center;
+    padding: $moderate;
+    margin: 0;
+  }
+}

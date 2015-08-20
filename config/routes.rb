@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
-  resources :users
-  resources :sessions
+  resource :user
+  get 'login' => 'sessions#new', as: :login
+  resource :session
 
   root 'tops#index'
   # TODO: 不要なルーティングは外す

@@ -3,7 +3,7 @@
 #login-form
   %h1= @title
 
-  = form_for @form, url: :sessions do |f|
+  = form_for @form, url: :session do |f|
     %div
       = f.label :email, 'メールアドレス'
       = f.text_field :email

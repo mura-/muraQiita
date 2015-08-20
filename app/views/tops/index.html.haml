@@ -1,19 +1,16 @@
-- @title = 'トップページ'
-%h1= @title
+.top-wrapper
+  .top-title
+    %span#logo MuraQiita
+    %span MuraQiitaは、murahamaのための技術情報共有サービスです。
+  .top-form.cf
+    = form_for @form, url: :session do |f|
+      %div
+        = f.label :email, 'メールアドレス'
+        = f.text_field :email
+      %div
+        = f.label :password, 'パスワード'
+        = f.password_field :password
+      %div
+        = f.submit 'ログイン'
 
-.top-title
-  %span MuraQiitaは、murahamaのための技術情報共有サービスです。
-.top-form
-  = form_for @form, url: :sessions do |f|
-    %div
-      = f.label :email, 'メールアドレス'
-      = f.text_field :email
-    %div
-      = f.label :password, 'パスワード'
-      = f.password_field :password
-    %div
-      = f.submit 'ログイン'
-
-  = link_to '新規登録はコチラ', :new_user
-
-
+    = link_to '新規登録はコチラ', :new_user
