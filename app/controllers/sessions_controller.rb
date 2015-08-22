@@ -1,4 +1,6 @@
 class SessionsController < ApplicationController
+  skip_before_action :authorize
+
   def new 
     if session[:user_id]
       redirect_to :root
@@ -14,8 +16,11 @@ class SessionsController < ApplicationController
       user = User.find_by(email_for_index: @form.email.downcase)
       if authenticate(user, @form.password)
         session[:user_id] = user.id
+        session[:last_access_time] = Time.current
+        flash.notice = 'ログインしました。'
         redirect_to :root
       else
+        flash.alert = 'ログインできませんでした。正しいメールアドレスとパスワードを入力してください。'
         render action: 'new'
       end
     else
@@ -28,10 +33,4 @@ class SessionsController < ApplicationController
     redirect_to :root
   end
 
-  private
-  def authenticate(user, raw_password)
-    user &&
-      user.hashed_password &&
-      BCrypt::Password.new(user.hashed_password) == raw_password
-  end
 end

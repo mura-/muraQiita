@@ -12,4 +12,8 @@ class User < ActiveRecord::Base
       self.hashed_password = nil
     end
   end
+
+  def active?
+    !suspended? 
+  end
 end

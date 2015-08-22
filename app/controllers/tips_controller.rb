@@ -17,14 +17,18 @@ class TipsController < ApplicationController
   end
 
   def edit
-    tip_id = params[:id]
-    @tip = Tip.find(tip_id)
+    @tip = Tip.find(params[:id])
+    if current_user.id != @tip.user_id 
+      flash.alert = '他ユーザーの記事は変更できません。'
+      redirect_to tip_url(@tip) and return
+    end
   end
 
   def create
     @tip = Tip.new(tip_params)
-    @tip.user_id = session[:user_id]
+    @tip.user_id = current_user.id 
     if @tip.save
+      flash.notice = '記事を作成しました。'
       redirect_to tip_url(@tip)
     else
       render action: 'new'
@@ -33,6 +37,10 @@ class TipsController < ApplicationController
 
   def update
     @tip = Tip.find(params[:id])
+    if current_user.id != @tip.user_id 
+      flash.alert = '他ユーザーの記事は変更できません。'
+      redirect_to tip_url(@tip) and return
+    end
     @tip.assign_attributes(tip_params)
     if @tip.save
       flash.notice = '記事を更新しました。'
@@ -44,6 +52,10 @@ class TipsController < ApplicationController
 
   def destroy
     tip = Tip.find(params[:id])
+    if current_user.id != tip.user_id 
+      flash.alert = '他ユーザーの記事は変更できません。'
+      redirect_to tip_url(tip) and return
+    end
     tip.destroy!
     flash.notice = '記事を削除しました。'
     redirect_to :root
@@ -53,4 +65,5 @@ class TipsController < ApplicationController
   def tip_params
     params.require(:tip).permit( :title, :content)
   end
+
 end
