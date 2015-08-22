@@ -1,0 +1,56 @@
+class TipsController < ApplicationController
+  def index
+    @tips = Tip.order(created_at: :desc)
+  end
+
+  def mine 
+    @tips = Tip.where(user_id: session[:user_id]).order(created_at: :desc)
+    render 'index'
+  end
+
+  def show
+    @tip = Tip.find(params[:id])
+  end
+
+  def new
+    @tip = Tip.new
+  end
+
+  def edit
+    tip_id = params[:id]
+    @tip = Tip.find(tip_id)
+  end
+
+  def create
+    @tip = Tip.new(tip_params)
+    @tip.user_id = session[:user_id]
+    if @tip.save
+      redirect_to tip_url(@tip)
+    else
+      render action: 'new'
+    end
+  end
+
+  def update
+    @tip = Tip.find(params[:id])
+    @tip.assign_attributes(tip_params)
+    if @tip.save
+      flash.notice = '記事を更新しました。'
+      redirect_to tip_url(@tip)
+    else
+      render action: 'edit'
+    end
+  end
+
+  def destroy
+    tip = Tip.find(params[:id])
+    tip.destroy!
+    flash.notice = '記事を削除しました。'
+    redirect_to :root
+  end
+
+  private
+  def tip_params
+    params.require(:tip).permit( :title, :content)
+  end
+end

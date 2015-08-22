@@ -7,6 +7,10 @@ html, body {
   height: 100%;
 }
 
+#container {
+  margin: $wide $base;
+}
+
 .cf {
   *zoom:1;
   *min-height:0;
@@ -78,4 +82,16 @@ footer {
     padding: $moderate;
     margin: 0;
   }
+}
+
+.btn {
+  margin: $wide;
+  padding: $moderate $very_wide;
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.2em;
+  color: white;
+  background-color: $green;
+  border-style: none;
+  text-decoration: none;
 }

@@ -1,0 +1,9 @@
+- @title = 'Tips一覧'
+.tips-wrapper
+  %h1 Tips一覧
+  - @tips.each do |t|
+    .tip
+      %span.name= "#{t.user.name}が#{time_ago_in_words (t.created_at)}前に投稿しました"
+      %span.title= link_to t.title, tip_url(id: t.id)
+
+= link_to 'Tipsを新規登録する', :new_tip, class: ['btn']

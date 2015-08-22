@@ -1,0 +1,13 @@
+- @title = '新規登録'
+.tip-edit
+  %h1= @title
+  = form_for @tip, url: :tips do |f|
+    %div
+      = f.label :title, 'タイトル', class: 'required'
+      = f.text_field :title, size: 100, required: true
+    %div
+      = f.label :content, '内容', class: 'required'
+      = f.text_area :content, size: 32, required: true
+    .buttons
+      = f.submit '登録', class: 'btn'
+      = link_to 'キャンセル', tips_url(@tip)

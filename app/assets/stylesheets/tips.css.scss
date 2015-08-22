@@ -1,0 +1,73 @@
+@import './dimensions';
+@import './colors';
+
+div.tip-show {
+  .title {
+    margin-top: -10px;
+    margin-right: -$base;
+    margin-left: -$base;
+    background-color: $green;
+    height: 200px;
+    span {
+      margin-left: $base;
+      display: block;
+      color: white;
+      line-height: 100px;
+      font-size: $very_huge;
+    }
+    .option {
+      margin-left: $base;
+      padding: 5px 10px;
+      background-color: $light_gray;
+      display: inline;
+      a {
+        text-decoration: none;
+      }
+      a, a:hover, a:visited, a:link, a:active {
+        color: $dark_gray;
+      }
+    }
+  }
+  .content {
+  }
+}
+
+div.tip-edit {
+  label {
+    padding: 10px;
+    font-weight: bold;
+    display: block; 
+    width: 100px;
+  }
+  input[type="text"] {
+    margin-left: $moderate;
+    padding: $wide;
+    width: 800px;
+  }
+  textarea {
+    margin-left: $moderate;
+    padding: $wide;
+    height: 300px;
+    width: 800px;
+  }
+}
+
+div.tips-wrapper {
+  .tip {
+    margin-bottom: $wide;
+    border-top: solid 1px $gray;
+    span.name {
+      margin-left: $wide;
+      display: block;
+      font-size: $normal;
+    }
+    span.title {
+      margin-left: $wide;
+      font-size: $huge;
+      font-weight: bold;
+      a {
+        text-decoration: none;
+      }
+    }
+  }
+}

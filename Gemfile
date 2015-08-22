@@ -41,6 +41,7 @@ gem 'date_validator', '~> 0.7.0'
 gem 'email_validator', '~> 1.4.0'
 gem 'haml-rails'
 gem 'erb2haml'
+gem "redcarpet", "~> 2.3.0" # markdown
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
