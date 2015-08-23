@@ -10,6 +10,10 @@ class TipsController < ApplicationController
 
   def show
     @tip = Tip.find(params[:id])
+    @stock = Stock.find_by(user_id: current_user.id, tip_id: params[:id])
+    if @stock.blank?
+      @stock = Stock.new(tip_id: params[:id])
+    end
     @comments = @tip.comments
     @comment = Comment.new(tip_id: params[:id])
   end

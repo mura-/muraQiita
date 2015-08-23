@@ -2,6 +2,14 @@
 .tip-show
   .title
     %h1= @tip.title
+    .stock.cf
+      - if @stock.id.blank?
+        = form_for @stock, url: user_stocks_path do |f|
+          = f.hidden_field :tip_id, value: params[:id]
+          = f.submit 'ストックする'
+      - else
+        = link_to 'ストックを取り消す', user_stock_path(@stock.id), method: :delete, data: { confirm: '本当にストックを取り消しますか?' }
+
     - if @tip.user_id == current_user.id
       .option
         = link_to '投稿を編集する', edit_tip_url(@tip)
@@ -10,7 +18,8 @@
     %div= markdown(@tip.content)
 .comments-show
   .comments
-    %h3 コメント
+    - if @comments.present?
+      %h3 コメント
     - @comments.each do |c|
       %div
         .name= c.user.name

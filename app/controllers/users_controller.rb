@@ -5,6 +5,7 @@ class UsersController < ApplicationController
     user_id = session[:user_id]
     @user = User.find(user_id)
     @tips = Tip.where(user_id: user_id)
+    @stocks = Stock.where(user_id: user_id)
   end
 
   def new

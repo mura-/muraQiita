@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  resource :user
+  resource :user do
+    resources :stocks
+  end
   get 'login' => 'sessions#new', as: :login
   resource :session, only: [ :create, :destroy ]
   resources :tips do
