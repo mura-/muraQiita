@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  has_many :tips, dependent: :destroy
+  has_many :tips, dependent: :destroy, :through => :comments
 
   before_validation do
     self.email_for_index = email.downcase if email

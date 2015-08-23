@@ -10,6 +10,8 @@ class TipsController < ApplicationController
 
   def show
     @tip = Tip.find(params[:id])
+    @comments = @tip.comments
+    @comment = Comment.new(tip_id: params[:id])
   end
 
   def new

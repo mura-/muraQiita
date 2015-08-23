@@ -1,4 +1,4 @@
-- @title = 'アカウント情報'
+- @title = 'マイページ'
 %h1= @title
 .table-wrapper
   .links
@@ -25,3 +25,11 @@
       %td.date
         = @user.start_date.strftime('%Y/%m/%d')
 
+%h2 投稿したTips一覧
+.tips-wrapper
+  - @tips.each do |t|
+    .tip
+      %span.name= "#{t.user.name}が#{time_ago_in_words (t.created_at)}前に投稿しました"
+      %span.title= link_to t.title, tip_url(id: t.id)
+
+= link_to 'Tipsを新規登録する', :new_tip, class: ['btn']

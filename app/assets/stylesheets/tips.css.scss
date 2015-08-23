@@ -2,18 +2,18 @@
 @import './colors';
 
 div.tip-show {
+  margin-bottom: $very_wide;
   .title {
-    margin-top: -10px;
+    margin-top: -20px;
     margin-right: -$base;
     margin-left: -$base;
     background-color: $green;
     height: 200px;
-    span {
+    h1 {
       margin-left: $base;
       display: block;
       color: white;
       line-height: 100px;
-      font-size: $very_huge;
     }
     .option {
       margin-left: $base;
@@ -69,5 +69,31 @@ div.tips-wrapper {
         text-decoration: none;
       }
     }
+  }
+}
+
+div.comments-show {
+  width: 800px;
+  div {
+    border-top: solid 1px $gray;
+    .name {
+      font-size: $normal;
+      float: left;
+    }
+    .time {
+      font-size: $normal;
+      text-align: right;
+    }
+    .content {
+      border-top: solid 1px $light_gray;
+      font-size: $large;
+      margin-top: $wide;
+    }
+  }
+  textarea {
+    margin-left: $moderate;
+    padding: $wide;
+    height: 100px;
+    width: 100%;
   }
 }

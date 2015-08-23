@@ -1,8 +1,10 @@
 class SessionsController < ApplicationController
   skip_before_action :authorize
+  skip_before_action :check_account
+  skip_before_action :check_timeout
 
   def new 
-    if session[:user_id]
+    if current_user
       redirect_to :root
     else
       @form = LoginForm.new

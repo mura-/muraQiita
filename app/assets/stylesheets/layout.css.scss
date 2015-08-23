@@ -66,21 +66,26 @@ header {
     font-weight: bold;
   }
   a {
+    display: inline-block;
     float: right;
     color: $green;
+    margin: auto $wide;
+    text-decoration: none;
   }
 }
 
 footer {
   bottom: 0;
-  position: absolute;
+  position: fixed;
   width: 100%;
-  background-color: $dark_gray;
-  color: $very_light_gray;
+  background-color: white;
+  color: $green;
+  border-top: solid 1px $light_gray;
   p {
     text-align: center;
     padding: $moderate;
     margin: 0;
+    font-size: $normal;
   }
 }
 

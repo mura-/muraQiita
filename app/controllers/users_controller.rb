@@ -1,23 +1,19 @@
 class UsersController < ApplicationController
-  def index 
-    render action: 'index'
-  end
+  skip_before_action :authorize, :only => [:create, :new]
 
   def show
     user_id = session[:user_id]
     @user = User.find(user_id)
-    render action: 'show'
+    @tips = Tip.where(user_id: user_id)
   end
 
   def new
     @user = User.new
-    render action: 'new'
   end
 
   def edit
     user_id = session[:user_id]
     @user = User.find(user_id)
-    render action: 'edit'
   end
 
   def create
@@ -25,7 +21,6 @@ class UsersController < ApplicationController
     if @user.save
       redirect_to :root
     else 
-      render action: 'new'
     end
   end
 
@@ -36,7 +31,6 @@ class UsersController < ApplicationController
       flash.notice = 'アカウントを更新しました。'
       redirect_to user_url
     else 
-      render action: 'edit'
     end
   end
 

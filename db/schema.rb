@@ -11,7 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150820182341) do
+ActiveRecord::Schema.define(version: 20150822092522) do
+
+  create_table "comments", force: :cascade do |t|
+    t.integer  "user_id",    limit: 4,     null: false
+    t.integer  "tip_id",     limit: 4,     null: false
+    t.text     "content",    limit: 65535, null: false
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
+
+  add_index "comments", ["tip_id", "user_id"], name: "index_comments_on_tip_id_and_user_id", using: :btree
+  add_index "comments", ["user_id"], name: "fk_rails_03de2dc08c", using: :btree
 
   create_table "tips", force: :cascade do |t|
     t.integer  "user_id",    limit: 4,     null: false
@@ -38,5 +49,7 @@ ActiveRecord::Schema.define(version: 20150820182341) do
 
   add_index "users", ["email_for_index"], name: "index_users_on_email_for_index", unique: true, using: :btree
 
+  add_foreign_key "comments", "tips"
+  add_foreign_key "comments", "users"
   add_foreign_key "tips", "users"
 end

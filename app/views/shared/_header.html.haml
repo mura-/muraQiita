@@ -4,6 +4,7 @@
   = content_tag(:span, flash.alert, class: 'alert') if flash.alert
   - if current_user
     = link_to 'ログアウト', :session, method: :delete
+    = link_to 'マイページ', :user
   - else
     = link_to 'ログイン', :login
   

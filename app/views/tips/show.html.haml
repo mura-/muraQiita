@@ -1,12 +1,24 @@
 - @title = @tip.title
 .tip-show
   .title
-    %span= @tip.title
+    %h1= @tip.title
     - if @tip.user_id == current_user.id
       .option
         = link_to '投稿を編集する', edit_tip_url(@tip)
         = link_to '削除', [ :tip ], method: :delete, data: { confirm: '本当に削除しますか?' }
   .content
     %div= markdown(@tip.content)
-  // TODO: ユーザーによって変更できるように
-
+.comments-show
+  .comments
+    %h3 コメント
+    - @comments.each do |c|
+      %div
+        .name= c.user.name
+        .time.cf= c.created_at.strftime('%F %T')
+        .content= markdown(c.content)
+  %h3 コメントを投稿する
+  = form_for @comment, url: tip_comments_path(params[:id])  do |f|
+    %div
+      = f.text_area :content, size: 32, required: true
+    .buttons
+      = f.submit '投稿する', class: 'btn'
