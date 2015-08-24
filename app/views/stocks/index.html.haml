@@ -1,0 +1,8 @@
+- @title = 'ストックしたtips一覧'
+.tips-wrapper
+  %h1 ストック一覧
+  - @stocks.each do |s|
+    .tip
+      %span.name= "#{s.tip.user.name}が#{time_ago_in_words (s.tip.created_at)}前に投稿しました"
+      %span.title= link_to s.tip.title, tip_url(id: s.tip.id)
+
