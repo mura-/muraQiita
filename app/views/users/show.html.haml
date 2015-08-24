@@ -2,7 +2,7 @@
 %h1= @title
 .table-wrapper
   .links
-    = link_to 'アカウント情報編集', :edit_user
+    = link_to 'ユーザー名を変更する', :edit_user
   
   %table.attributes
     %tr
@@ -13,13 +13,14 @@
       %th ユーザー名
       %td
         = @user.name
-    %tr
-      %th メールアドレス
-      %td.email
-        = @user.email
-    %tr
-      %th パスワード
-      %td.password ************
+    - if @user.provider == nil
+      %tr
+        %th メールアドレス
+        %td.email
+          = @user.email
+      %tr
+        %th パスワード
+        %td.password ************
     %tr
       %th 開始日
       %td.date

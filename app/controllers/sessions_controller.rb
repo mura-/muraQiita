@@ -3,15 +3,6 @@ class SessionsController < ApplicationController
   skip_before_action :check_account
   skip_before_action :check_timeout
 
-  def new 
-    if current_user
-      redirect_to :root
-    else
-      @form = LoginForm.new
-      render action: 'new'
-    end
-  end
-
   def create
     @form = LoginForm.new(params[:login_form])
     if @form.email.present?

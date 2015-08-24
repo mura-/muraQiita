@@ -2,15 +2,7 @@
 .tip-edit
   %h1= @title
   = form_for @tip, url: :tip do |f|
-    %div
-      = f.label :title, 'タイトル', class: 'required'
-      = f.text_field :title, size: 100, required: true
-    %div
-      = f.label :tag, 'タグ'
-      %ul#tip-tags
-    %div
-      = f.label :content, '内容', class: 'required'
-      = f.text_area :content, size: 32, required: true
+    = render 'form', f: f
     .buttons
       = f.submit '更新', class: 'btn'
       = link_to 'キャンセル', tips_url(@tip)
