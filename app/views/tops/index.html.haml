@@ -2,7 +2,7 @@
   .top-title
     %span#logo MuraQiita
     %span MuraQiitaは、murahamaのための技術情報共有サービスです。
-  .top-form.cf
+  .top-form
     = form_for @form, url: :session do |f|
       %div
         = f.label :email, 'メールアドレス'
@@ -12,5 +12,6 @@
         = f.password_field :password
       %div
         = f.submit 'ログイン'
-
     = link_to '新規登録はコチラ', :new_user
+    = link_to 'Twitterでログイン', '/auth/twitter', class: 'twitter-form'
+

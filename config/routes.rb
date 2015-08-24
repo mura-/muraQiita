@@ -11,4 +11,8 @@ Rails.application.routes.draw do
   get 'mine' => 'tips#mine', as: :mine
 
   root 'tops#index'
+
+  get '/auth/:provider/callback', :to => 'sessions#callback'
+  post '/auth/:provider/callback', :to => 'sessions#callback'
+  get '/logout' => 'sessions#destroy', :as => :logout
 end
