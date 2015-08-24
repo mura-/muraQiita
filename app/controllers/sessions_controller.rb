@@ -35,4 +35,11 @@ class SessionsController < ApplicationController
     redirect_to :root
   end
 
+  def callback
+    auth = request.env['omniauth.auth']
+    user = User.find_by_provider_and_uid(auth['provider'], auth['uid']) || User.create_with_omniauth(auth)
+    session[:user_id] = user.id
+    session[:last_access_time] = Time.current
+    redirect_to :root
+  end
 end

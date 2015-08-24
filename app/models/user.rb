@@ -17,4 +17,17 @@ class User < ActiveRecord::Base
   def active?
     !suspended? 
   end
+
+  def self.create_with_omniauth(auth)
+    logger.debug auth
+    create! do |user|
+      user.provider = auth['provider']
+      user.uid = auth['uid']
+      user.email = auth['uid']
+      user.email_for_index = auth['uid']
+      user.screen_name = auth['info']['nickname']
+      user.name = auth['info']['name']
+      user.start_date = Time.current
+    end
+  end
 end
