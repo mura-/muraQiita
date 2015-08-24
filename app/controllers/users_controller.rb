@@ -2,10 +2,10 @@ class UsersController < ApplicationController
   skip_before_action :authorize, :only => [:create, :new]
 
   def show
-    user_id = session[:user_id]
+    user_id = current_user.id
     @user = User.find(user_id)
-    @tips = Tip.where(user_id: user_id)
-    @stocks = Stock.where(user_id: user_id)
+    @tips = Tip.where(user_id: user_id).order(created_at: :desc).limit(5)
+    @stocks = Stock.where(user_id: user_id).order(created_at: :desc).limit(5)
   end
 
   def new
@@ -20,6 +20,8 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
+      session[:user_id] = @user.id
+      session[:last_access_time] = Time.current
       redirect_to :root
     else 
     end

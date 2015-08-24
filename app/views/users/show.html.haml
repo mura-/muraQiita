@@ -32,6 +32,7 @@
     .tip
       %span.name= "#{t.user.name}が#{time_ago_in_words (t.created_at)}前に投稿しました"
       %span.title= link_to t.title, tip_url(id: t.id)
+  = link_to '投稿したTipsをもっと見る', :mine, class: 'btn'
 
 %h2 ストックしたTips一覧
 .tips-wrapper
@@ -39,4 +40,5 @@
     .tip
       %span.name= "#{s.tip.user.name}が#{time_ago_in_words (s.tip.created_at)}前に投稿しました"
       %span.title= link_to s.tip.title, tip_url(id: s.tip.id)
+  = link_to 'ストックしたTipsをもっと見る', :user_stocks, class: 'btn'
 

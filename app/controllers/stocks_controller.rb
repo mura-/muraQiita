@@ -1,5 +1,8 @@
 class StocksController < ApplicationController
   def index
+    user_id = current_user.id
+    @user = User.find(user_id)
+    @stocks = Stock.where(user_id: user_id).order(created_at: :desc)
   end
 
   def create

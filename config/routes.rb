@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
   root 'tops#index'
 
-  resource :user, except:[ :destory ] do
-    resources :stocks, only: [ :index, :create, :destory ]
+  resource :user, except:[ :destroy ] do
+    resources :stocks, only: [ :index, :create, :destroy ]
   end
 
   resource :session, only: [ :create, :destroy ]

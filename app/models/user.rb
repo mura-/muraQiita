@@ -4,6 +4,7 @@ class User < ActiveRecord::Base
 
   before_validation do
     self.email_for_index = email.downcase if email
+    self.start_date = Date.current if start_date.blank?
   end
 
   def password=(row_password)
