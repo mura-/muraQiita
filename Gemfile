@@ -43,6 +43,9 @@ gem 'haml-rails'
 gem 'erb2haml'
 gem "redcarpet", "~> 2.3.0" # markdown
 gem 'composite_primary_keys'
+gem 'acts-as-taggable-on', '~> 3.5'
+gem 'jquery-ui-rails'
+gem 'gon'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'

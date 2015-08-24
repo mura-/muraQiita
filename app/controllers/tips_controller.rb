@@ -1,4 +1,7 @@
 class TipsController < ApplicationController
+  before_action :set_tip_tags_to_gon, only: [:edit]
+  before_action :set_available_tags_to_gon, only: [:new, :edit]
+
   def index
     @tips = Tip.order(created_at: :desc)
   end
@@ -69,7 +72,15 @@ class TipsController < ApplicationController
 
   private
   def tip_params
-    params.require(:tip).permit( :title, :content)
+    params.require(:tip).permit(:title, :content, :tag_list)
   end
 
+  def set_tip_tags_to_gon
+    @tip = Tip.find(params[:id])
+    gon.tip_tags = @tip.tag_list
+  end
+
+  def set_available_tags_to_gon
+    gon.available_tags = Tip.tags_on(:tags).pluck(:name)
+  end
 end

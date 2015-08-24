@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150823135051) do
+ActiveRecord::Schema.define(version: 20150823162932) do
 
   create_table "comments", force: :cascade do |t|
     t.integer  "user_id",    limit: 4,     null: false
@@ -34,6 +34,26 @@ ActiveRecord::Schema.define(version: 20150823135051) do
   add_index "stocks", ["tip_id"], name: "index_stocks_on_tip_id", using: :btree
   add_index "stocks", ["user_id", "tip_id"], name: "index_stocks_on_user_id_and_tip_id", unique: true, using: :btree
   add_index "stocks", ["user_id"], name: "index_stocks_on_user_id", using: :btree
+
+  create_table "taggings", force: :cascade do |t|
+    t.integer  "tag_id",        limit: 4
+    t.integer  "taggable_id",   limit: 4
+    t.string   "taggable_type", limit: 255
+    t.integer  "tagger_id",     limit: 4
+    t.string   "tagger_type",   limit: 255
+    t.string   "context",       limit: 128
+    t.datetime "created_at"
+  end
+
+  add_index "taggings", ["tag_id", "taggable_id", "taggable_type", "context", "tagger_id", "tagger_type"], name: "taggings_idx", unique: true, using: :btree
+  add_index "taggings", ["taggable_id", "taggable_type", "context"], name: "index_taggings_on_taggable_id_and_taggable_type_and_context", using: :btree
+
+  create_table "tags", force: :cascade do |t|
+    t.string  "name",           limit: 255
+    t.integer "taggings_count", limit: 4,   default: 0
+  end
+
+  add_index "tags", ["name"], name: "index_tags_on_name", unique: true, using: :btree
 
   create_table "tips", force: :cascade do |t|
     t.integer  "user_id",    limit: 4,     null: false

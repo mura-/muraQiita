@@ -9,11 +9,15 @@
           = f.submit 'ストックする'
       - else
         = link_to 'ストックを取り消す', user_stock_path(@stock.id), method: :delete, data: { confirm: '本当にストックを取り消しますか?' }
-
+    %span.tags
+      - @tip.tags.each do |tag|
+        %span.tag= "#{tag.name} (#{tag.taggings_count})"
     - if @tip.user_id == current_user.id
       .option
-        = link_to '投稿を編集する', edit_tip_url(@tip)
+        = link_to '投稿を編集する', edit_tip_url(@tip), data: { no_turbolink: true }
         = link_to '削除', [ :tip ], method: :delete, data: { confirm: '本当に削除しますか?' }
+    .author.cf= "#{@tip.user.name}が#{@tip.created_at.strftime('%Y/%m/%d')}に投稿"
+
   .content
     %div= markdown(@tip.content)
 .comments-show

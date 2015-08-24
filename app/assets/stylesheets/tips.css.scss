@@ -18,18 +18,6 @@ div.tip-show {
       color: white;
       line-height: 150px;
     }
-    .option {
-      margin-left: $base;
-      padding: 5px 10px;
-      background-color: $light_gray;
-      display: inline;
-      a {
-        text-decoration: none;
-      }
-      a, a:hover, a:visited, a:link, a:active {
-        color: $dark_gray;
-      }
-    }
     .stock {
       text-align: right;
       margin-right: 100px;
@@ -41,6 +29,37 @@ div.tip-show {
         padding: 5px 40px;
         border-style: none;
         text-decoration: none;
+      }
+    }
+    .tags {
+      font-size: $normal;
+      display: block;
+      margin-top: -40px;
+      margin-left: $base;
+      position: absolute;
+      .tag {
+        color: $dark_gray;
+        background-color: $light_gray;
+        margin-right: $narrow;
+        padding: $narrow;
+      }
+    }
+    .author {
+      color: white;
+      position: relative;
+      padding: 5px 0px;
+      display: inline-block;
+      margin-left: $base;
+    }
+    .option {
+      margin-left: $base;
+      padding: 5px 10px;
+      background-color: $light_gray;
+      display: block;
+      float: left;
+      a {
+        text-decoration: none;
+        color: $dark_gray;
       }
     }
   }
@@ -56,6 +75,11 @@ div.tip-edit {
     width: 100px;
   }
   input[type="text"] {
+    margin-left: $moderate;
+    padding: $wide;
+    width: 800px;
+  }
+  #tip-tags {
     margin-left: $moderate;
     padding: $wide;
     width: 800px;
@@ -90,7 +114,7 @@ div.tips-wrapper {
 
 div.comments-show {
   width: 800px;
-  div {
+  div.comments {
     border-top: solid 1px $gray;
     .name {
       font-size: $normal;
@@ -112,4 +136,7 @@ div.comments-show {
     height: 100px;
     width: 100%;
   }
+}
+.ui-helper-hidden-accessible {
+  display: none;
 }
