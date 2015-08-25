@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
   before_action :authorize
   before_action :check_account
   before_action :check_timeout
+  http_basic_authenticate_with :name => 'admin', :password => 'tryout' if Rails.env == "production"
 
   private
   def current_user
