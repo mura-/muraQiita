@@ -8,7 +8,6 @@ class TopsController < ApplicationController
       redirect_to tips_url
     else 
       @form = LoginForm.new
-      render 'index'
     end
   end
 end

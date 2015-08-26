@@ -1,12 +1,9 @@
 - @title = '新規登録'
 %h1= @title
 
-.notes
-  %span.mark *
-  印の付いた項目は入力必須です。
-
 = form_for @user, url: :user do |f|
   = render 'form', f: f
   .buttons
     = f.submit '登録'
     = link_to 'キャンセル', :root
+    = link_to 'Twitterでログイン', '/auth/twitter', class: 'twitter-form'

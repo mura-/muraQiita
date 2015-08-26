@@ -1,21 +1,20 @@
 class StocksController < ApplicationController
   def index
-    user_id = current_user.id
-    @user = User.find(user_id)
-    @stocks = Stock.where(user_id: user_id).order(created_at: :desc)
+    @stocks = current_user.stocks.order(created_at: :desc)
   end
 
   def create
-    stock = Stock.new(stock_params.merge({user_id: current_user.id}))
+    stock = current_user.stocks.new(stock_params)
     if stock.save
-    else 
+      flash.notice = 'ストックしました。'
+    else
       flash.alert = 'ストックできませんでした。もう一度お試しください。'
     end
     redirect_to tip_path(stock_params[:tip_id])
   end
 
   def destroy
-    stock = Stock.find(params[:id])
+    stock = current_user.stocks.find(params[:id])
     tip_id = stock.tip_id
     if stock.destroy!
       flash.notice = 'ストックを取り消しました'
@@ -27,8 +26,6 @@ class StocksController < ApplicationController
 
   private
   def stock_params
-    params.require(:stock).permit(
-      :tip_id, :user_id
-    )
+    params.require(:stock).permit(:tip_id, :user_id)
   end
 end

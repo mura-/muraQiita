@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
   private
   def current_user
     if session[:user_id]
-      @current_user ||= User.find_by(id: session[:user_id])
+      @current_user ||= User.find(session[:user_id])
     end
   end
 
@@ -23,10 +23,11 @@ class ApplicationController < ActionController::Base
   def authorize
     unless current_user
       flash.alert = 'ログインしてください。'
-      redirect_to :login
+      redirect_to :root
     end
   end
 
+  # ログイン中であってもアカウントが無効になってないかチェックする
   def check_account
     if current_user && !current_user.active?
       session.delete(:user_id)
@@ -38,6 +39,7 @@ class ApplicationController < ActionController::Base
 
   TIMEOUT = 60.minutes
 
+  # セッションのタイムアウトをチェックする
   def check_timeout
     if current_user
       if session[:last_access_time] >= TIMEOUT.ago
@@ -45,7 +47,7 @@ class ApplicationController < ActionController::Base
       else
         session.delete(:user_id)
         flash.alert = 'セッションがタイムアウトしました。'
-        redirect_to :login
+        redirect_to :root
       end
     end
   end

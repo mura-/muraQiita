@@ -8,30 +8,30 @@
     %tr
       %th ユーザーID
       %td
-        = @user.id
+        = current_user.id
     %tr
       %th ユーザー名
       %td
-        = @user.name
-    - if @user.provider == nil
+        = current_user.name
+    - if current_user.provider == nil
       %tr
         %th メールアドレス
         %td.email
-          = @user.email
+          = current_user.email
       %tr
         %th パスワード
         %td.password ************
     %tr
       %th 開始日
       %td.date
-        = @user.start_date.strftime('%Y/%m/%d')
+        = current_user.start_date.strftime('%Y/%m/%d')
 
 %h2 投稿したTips一覧
 .tips-wrapper
   - @tips.each do |t|
     .tip
       %span.name= "#{t.user.name}が#{time_ago_in_words (t.created_at)}前に投稿しました"
-      %span.title= link_to t.title, tip_url(id: t.id)
+      %span.title= link_to t.title, tip_url(t)
   = link_to '投稿したTipsをもっと見る', :mine, class: 'btn'
 
 %h2 ストックしたTips一覧
@@ -39,6 +39,6 @@
   - @stocks.each do |s|
     .tip
       %span.name= "#{s.tip.user.name}が#{time_ago_in_words (s.tip.created_at)}前に投稿しました"
-      %span.title= link_to s.tip.title, tip_url(id: s.tip.id)
+      %span.title= link_to s.tip.title, tip_url(s.tip)
   = link_to 'ストックしたTipsをもっと見る', :user_stocks, class: 'btn'
 
