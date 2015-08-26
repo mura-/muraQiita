@@ -9,16 +9,13 @@ class SessionsController < ApplicationController
       user = User.find_by(email_for_index: @form.email.downcase)
       if authenticate(user, @form.password)
         session[:user_id] = user.id
-        session[:last_access_time] = Time.current
+        session[:last_access_time] = Time.current # セッション接続時間管理のため現在時刻をセット
         flash.notice = 'ログインしました。'
-        redirect_to :root
       else
         flash.alert = 'ログインできませんでした。正しいメールアドレスとパスワードを入力してください。'
-        render action: 'new'
       end
-    else
-      render action: 'new'
     end
+    redirect_to :root
   end
 
   def destroy
@@ -26,6 +23,7 @@ class SessionsController < ApplicationController
     redirect_to :root
   end
 
+  # twitterログインのコールバックメソッド
   def callback
     auth = request.env['omniauth.auth']
     user = User.find_by_provider_and_uid(auth['provider'], auth['uid']) || User.create_with_omniauth(auth)

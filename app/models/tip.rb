@@ -4,4 +4,5 @@ class Tip < ActiveRecord::Base
   has_many :stocks
 
   acts_as_taggable
+
 end

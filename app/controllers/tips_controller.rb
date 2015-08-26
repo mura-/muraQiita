@@ -7,13 +7,13 @@ class TipsController < ApplicationController
   end
 
   def mine 
-    @tips = Tip.where(user_id: session[:user_id]).order(created_at: :desc)
+    @tips = current_user.tips.order(created_at: :desc)
     render 'index'
   end
 
   def show
     @tip = Tip.find(params[:id])
-    @stock = Stock.find_by(user_id: current_user.id, tip_id: params[:id])
+    @stock = @tip.stocks.find_by(tip_id: params[:id])
     if @stock.blank?
       @stock = Stock.new(tip_id: params[:id])
     end
@@ -26,46 +26,45 @@ class TipsController < ApplicationController
   end
 
   def edit
-    @tip = Tip.find(params[:id])
-    if current_user.id != @tip.user_id 
+    @tip = current_user.tips.find(params[:id])
+    if @tip.blank?
       flash.alert = '他ユーザーの記事は変更できません。'
       redirect_to tip_url(@tip) and return
     end
   end
 
   def create
-    @tip = Tip.new(tip_params)
-    @tip.user_id = current_user.id 
+    @tip = current_user.tips.new(tip_params)
     if @tip.save
       flash.notice = '記事を作成しました。'
-      redirect_to tip_url(@tip)
+      redirect_to tip_url(@tip) and return
     else
       render action: 'new'
     end
   end
 
   def update
-    @tip = Tip.find(params[:id])
-    if current_user.id != @tip.user_id 
+    @tip = current_user.tips.find(params[:id])
+    if @tip.blank?
       flash.alert = '他ユーザーの記事は変更できません。'
       redirect_to tip_url(@tip) and return
     end
     @tip.assign_attributes(tip_params)
     if @tip.save
       flash.notice = '記事を更新しました。'
-      redirect_to tip_url(@tip)
+      redirect_to tip_url(@tip) and return
     else
       render action: 'edit'
     end
   end
 
   def destroy
-    tip = Tip.find(params[:id])
-    if current_user.id != tip.user_id 
-      flash.alert = '他ユーザーの記事は変更できません。'
-      redirect_to tip_url(tip) and return
+    @tip = current_user.tips.find(params[:id])
+    if @tip.blank?
+      flash.alert = '他ユーザーの記事は削除できません。'
+      redirect_to tip_url(@tip) and return
     end
-    tip.destroy!
+    @tip.destroy!
     flash.notice = '記事を削除しました。'
     redirect_to :root
   end

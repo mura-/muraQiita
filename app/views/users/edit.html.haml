@@ -5,7 +5,7 @@
   %span.mark *
   印の付いた項目は入力必須です。
 
-= form_for @user, url: :user do |f|
+= form_for current_user, url: :user do |f|
   %div
     = f.label :name, 'ユーザー名', class: 'required'
     = f.text_field :name, required: true
