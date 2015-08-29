@@ -15,4 +15,5 @@ Rails.application.routes.draw do
   end
   get 'mine' => 'tips#mine', as: :mine
 
+  get '*anything' => 'errors#routing_error'
 end
